@@ -1,7 +1,7 @@
 const cityInput = document.querySelector(".city-input");
 const searchButton = document.querySelector(".search-btn");
 const locationButton = document.querySelector(".location-btn");
-const unitToggleButton = document.querySelector(".unit-toggle-btn");
+
 const currentWeatherDiv = document.querySelector(".current-weather");
 const weatherCardsDiv = document.querySelector(".weather-cards");
 
@@ -99,29 +99,7 @@ const getUserCoordinates = () => {
         });
 }
 
-let isCelsius = true; // Flag to track the current unit
 
-const toggleUnits = () => {
-    isCelsius = !isCelsius; // Toggle the flag
-    updateTemperatureUnits();
-};
-
-const updateTemperatureUnits = () => {
-    const temperatureElements = document.querySelectorAll(".temperature");
-    temperatureElements.forEach(element => {
-        const currentTemperature = parseFloat(element.dataset.temperature);
-        if (isCelsius) {
-            const celsiusTemperature = kelvinToCelsius(currentTemperature);
-            element.textContent = `${celsiusTemperature.toFixed(2)}°C`;
-        } else {
-            const fahrenheitTemperature = celsiusToFahrenheit(kelvinToCelsius(currentTemperature));
-            element.textContent = `${fahrenheitTemperature.toFixed(2)}°F`;
-        }
-    });
-};
-const kelvinToCelsius = kelvin => kelvin - 273.15;
-
-const celsiusToFahrenheit = celsius => (celsius * 9 / 5) + 32;
 
 
 
@@ -130,4 +108,3 @@ const celsiusToFahrenheit = celsius => (celsius * 9 / 5) + 32;
 locationButton.addEventListener("click", getUserCoordinates);
 searchButton.addEventListener("click", getCityCoordinates);
 cityInput.addEventListener("keyup", e => e.key === "Enter" && getCityCoordinates());
-unitToggleButton.addEventListener("click", toggleUnits);
